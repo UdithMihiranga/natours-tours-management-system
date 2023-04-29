@@ -16,6 +16,7 @@ router
 
 router
   .route('/:id')
+  .get(reviewController.getReview)
   .delete(
     //authController.protect,
     //authController.restrictTo('admin', 'lead-guide'),
