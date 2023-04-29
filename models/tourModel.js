@@ -23,7 +23,7 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A tour must have a difficulty'],
       enum: {
-        values: ['easy', 'medium', 'difficulty'],
+        values: ['easy', 'medium', 'difficult'],
         message: 'enter correct difficulty',
       },
     },
@@ -114,6 +114,10 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
+// tourSchema.index({ price: 1 });
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
@@ -144,15 +148,15 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
-tourSchema.pre('save', function (next) {
-  console.log('Will save the doc');
-  next();
-});
+// tourSchema.pre('save', function (next) {
+//   console.log('Will save the doc');
+//   next();
+// });
 
-tourSchema.post('save', function (doc, next) {
-  console.log(doc);
-  next();
-});
+// tourSchema.post('save', function (doc, next) {
+//   console.log(doc);
+//   next();
+// });
 
 tourSchema.pre(/^find/, function (next) {
   this.find({ secreteTour: { $ne: true } });
