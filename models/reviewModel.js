@@ -39,9 +39,6 @@ reviewSchema.pre(/^find/, function (next) {
     //here this always points to current quarry.
     path: 'user',
     select: '-__v -passwordChangedAt',
-  }).populate({
-    path: 'tour',
-    select: 'name images -id id guides',
   });
   next();
 });
