@@ -1,6 +1,7 @@
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -71,17 +72,13 @@ exports.addUser = (req, res) => {
     message: 'This route is not implemented...!',
   });
 };
+//Do not update passwords with this
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);
 
-exports.updateUser = (req, res) => {
+exports.createUser = (req, res) => {
   res.status(500).json({
-    status: 'failed',
-    message: 'This route is not implemented...!',
-  });
-};
-
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'failed',
-    message: 'This route is not implemented...!',
+    status: 'error',
+    message: 'This route is not defined! Please use /signup instead'
   });
 };
